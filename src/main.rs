@@ -1,6 +1,6 @@
 extern crate rand;
 
-use std::io;
+//use std::io;
 use rand::thread_rng;
 use rand::seq::SliceRandom;
 
@@ -18,10 +18,8 @@ fn main() {
     */
 
     let mut input = read_input();
-
     let mut random = thread_rng();
-    input.as_mut_slice().shuffle(&mut random);
-    //rand::thread_rng().shuffle(&mut input);
+    input.shuffle(&mut random);
 
     print_output(input);
 }
