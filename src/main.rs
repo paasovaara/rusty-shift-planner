@@ -7,6 +7,9 @@ use std::io::{BufRead, BufReader};
 use std::{thread, time::Duration};
 use rand::thread_rng;
 use rand::seq::SliceRandom;
+//pub use types::Shift;
+
+mod shift;
 
 fn main() {
     println!("Creating a random list!");
@@ -35,6 +38,8 @@ fn main() {
         thread::sleep(Duration::from_secs(1));
         name
     };*/
+
+    let shifts: Vec<Shift> = Vec::new();
 
     print_output_via_decorator(input, delay);
 }
