@@ -25,15 +25,24 @@ fn main() {
 
     let mut random = thread_rng();
     input.shuffle(&mut random);
-//let print_closure = |name: &String| {
+    //print_output(&input);
+
+    //let print_closure = |name: &String| {
 //
-    /*let print_closure = (name: &String) {
+    //let print_closure = (name: &String) {
+    /*let print_closure = |name: &String| {
         println!("Next one is...");
         thread::sleep(Duration::from_secs(1));
         name
     };*/
-    print_output(input);
-    //print_output(input, &print_closure);
+
+    print_output_via_decorator(input, delay);
+}
+
+fn delay(name: &String) -> &String {
+    println!("Next one is...");
+    thread::sleep(Duration::from_secs(1));
+    name
 }
 
 fn read_input() -> Vec<String> {
@@ -47,17 +56,26 @@ fn read_input() -> Vec<String> {
     vec
 }
 
-fn print_output(output: Vec<String>/*, printer: &dyn Fn(&String) -> &String*/) {
+fn print_output(output: &Vec<String>/*, printer: &dyn Fn(&String) -> &String*/) {
     //fn print_output(output: Vec<String>, printer: &dyn Fn(&String) -> &String) {
-    for out in &output {
+    for out in output {
         thread::sleep(Duration::from_secs(1));
         println!("{}", out)
         //
         // println!("{}", printer(out));
     }
 }
+// Function overloading not supported, consider using traits
+// https://stackoverflow.com/questions/42236166/is-it-possible-to-overload-a-function-with-different-numbers-of-arguments-using
+//fn print_output_via_decorator(output: Vec<String>, decorator: &dyn Fn(&String) -> &String) {
+fn print_output_via_decorator(output: Vec<String>, decorator: fn(&String) -> &String) {
+    for out in &output {
+        println!("{}", decorator(out));
+    }
+}
 
 fn read_file_content(path: String) -> Vec<String> {
+    //TODO Error handling
     let f = File::open(path).expect("Unable to open file");
     let reader = BufReader::new(f);
     let mut lines: Vec<String> = Vec::new();
