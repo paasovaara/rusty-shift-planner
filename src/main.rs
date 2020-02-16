@@ -1,6 +1,7 @@
 extern crate rand;
 
 //use std::io;
+use std::{thread, time::Duration};
 use rand::thread_rng;
 use rand::seq::SliceRandom;
 
@@ -20,8 +21,15 @@ fn main() {
     let mut input = read_input();
     let mut random = thread_rng();
     input.shuffle(&mut random);
-
+//let print_closure = |name: &String| {
+//
+    /*let print_closure = (name: &String) {
+        println!("Next one is...");
+        thread::sleep(Duration::from_secs(1));
+        name
+    };*/
     print_output(input);
+    //print_output(input, &print_closure);
 }
 
 fn read_input() -> Vec<String> {
@@ -35,8 +43,12 @@ fn read_input() -> Vec<String> {
     vec
 }
 
-fn print_output(output: Vec<String>) {
+fn print_output(output: Vec<String>/*, printer: &dyn Fn(&String) -> &String*/) {
+    //fn print_output(output: Vec<String>, printer: &dyn Fn(&String) -> &String) {
     for out in &output {
-        println!("{}", out);
+        thread::sleep(Duration::from_secs(1));
+        println!("{}", out)
+        //
+        // println!("{}", printer(out));
     }
 }
