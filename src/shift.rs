@@ -2,8 +2,8 @@ use std::string;
 
 //mod types;
 
-pub struct Shift<'a> {
-    name: &'a str,
+pub struct Shift {
+    name: String,
     week: i32,
 }
 

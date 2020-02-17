@@ -1,6 +1,6 @@
 extern crate rand;
 
-//use std::io;
+use std::io;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
@@ -13,16 +13,7 @@ mod shift;
 
 fn main() {
     println!("Creating a random list!");
-    /*
-    println!("Please input your guess.");
 
-    let mut guess = String::new();
-
-    io::stdin().read_line(&mut guess)
-        .expect("Failed to read line");
-
-    println!("You guessed: {}", guess);
-    */
 
     let mut input = read_file_content("names.txt".to_string());
 
@@ -39,9 +30,20 @@ fn main() {
         name
     };*/
 
-    let shifts: Vec<Shift> = Vec::new();
+    //let shifts: Vec<Shift> = Vec::new();
 
     print_output_via_decorator(input, delay);
+}
+
+fn read_input() -> String {
+    println!("Please input something");
+    let mut smt = String::new();
+
+    io::stdin().read_line(&mut smt)
+        .expect("Failed to read line");
+
+    println!("You guessed: {}", smt);
+    smt
 }
 
 fn delay(name: &String) -> &String {
@@ -50,16 +52,6 @@ fn delay(name: &String) -> &String {
     name
 }
 
-fn read_input() -> Vec<String> {
-    println!("Reading input variables");
-    let vec: Vec<String> = vec![
-        "Markus".to_string(),
-        "Batman".to_string(),
-        "Joker".to_string(),
-        "Alfred".to_string()
-    ];
-    vec
-}
 
 fn print_output(output: &Vec<String>/*, printer: &dyn Fn(&String) -> &String*/) {
     //fn print_output(output: Vec<String>, printer: &dyn Fn(&String) -> &String) {
