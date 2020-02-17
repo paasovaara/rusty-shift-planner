@@ -1,5 +1,8 @@
 extern crate rand;
 
+use chrono;
+use chrono::{Local, DateTime, Datelike};
+
 use std::io;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
@@ -31,6 +34,8 @@ fn main() {
     };*/
 
     //let shifts: Vec<Shift> = Vec::new();
+    let current_week = get_current_week();
+    println!("Current week is {}", current_week);
 
     print_output_via_decorator(&input, delay);
 }
@@ -82,4 +87,14 @@ fn read_file_content(path: String) -> Vec<String> {
         lines.push(line_content.trim().to_string());
     }
     lines
+}
+
+fn get_current_week() -> u32 {
+    let now: DateTime<Local> = chrono::offset::Local::now();
+    now.iso_week().week()
+    //use chrono::naive::IsoWeek;
+    //use chrono::Datelike;
+
+    //Datelike::
+    //IsoWeek now = IsoWeek::ne
 }
