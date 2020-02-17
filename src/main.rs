@@ -32,7 +32,7 @@ fn main() {
 
     //let shifts: Vec<Shift> = Vec::new();
 
-    print_output_via_decorator(input, delay);
+    print_output_via_decorator(&input, delay);
 }
 
 fn read_input() -> String {
@@ -65,8 +65,8 @@ fn print_output(output: &Vec<String>/*, printer: &dyn Fn(&String) -> &String*/) 
 // Function overloading not supported, consider using traits
 // https://stackoverflow.com/questions/42236166/is-it-possible-to-overload-a-function-with-different-numbers-of-arguments-using
 //fn print_output_via_decorator(output: Vec<String>, decorator: &dyn Fn(&String) -> &String) {
-fn print_output_via_decorator(output: Vec<String>, decorator: fn(&String) -> &String) {
-    for out in &output {
+fn print_output_via_decorator(output: &Vec<String>, decorator: fn(&String) -> &String) {
+    for out in output {
         println!("{}", decorator(out));
     }
 }
