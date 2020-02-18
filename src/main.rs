@@ -10,13 +10,12 @@ use std::io::{BufRead, BufReader};
 use std::{thread, time::Duration};
 use rand::thread_rng;
 use rand::seq::SliceRandom;
-//pub use types::Shift;
 
-mod shift;
+pub mod shift;
+use shift::Shift;
 
 fn main() {
     println!("Creating a random list!");
-
 
     let mut input = read_file_content("names.txt".to_string());
 
