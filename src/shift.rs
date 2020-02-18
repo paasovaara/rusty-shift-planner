@@ -4,7 +4,7 @@ use std::string;
 
 pub struct Shift {
     pub name: String,
-    pub week: i32,
+    pub week: u32,
 }
 
 impl string::ToString for Shift {

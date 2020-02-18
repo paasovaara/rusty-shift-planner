@@ -32,11 +32,26 @@ fn main() {
         name
     };*/
 
-    //let shifts: Vec<Shift> = Vec::new();
-    let current_week = get_current_week();
+    let mut current_week = get_current_week();
     println!("Current week is {}", current_week);
 
-    print_output_via_decorator(&input, delay);
+    let mut shifts: Vec<Shift> = Vec::new();
+    //TODO use map
+    for name in input {
+        current_week = current_week + 1;
+        let shift = Shift {
+            name,
+            week: current_week,
+        };
+        shifts.push(shift);
+    }
+
+    for s in shifts {
+        thread::sleep(Duration::from_secs(3));
+        println!("{}", s.to_string())
+    }
+
+    //print_output_via_decorator(&input, delay);
 }
 
 fn read_input() -> String {
