@@ -9,6 +9,6 @@ pub struct Shift {
 
 impl string::ToString for Shift {
     fn to_string(&self) -> String {
-        format!("{},{}", self.week, self.name)
+        format!("{};{}", self.week, self.name)
     }
 }
