@@ -3,7 +3,7 @@ extern crate rand;
 use chrono;
 use chrono::{Local, DateTime, Datelike};
 
-use std::io;
+//use std::io;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
@@ -15,8 +15,6 @@ pub mod shift;
 use shift::Shift;
 
 fn main() {
-    println!("Creating a random list!");
-
     let mut input = read_file_content("names.txt".to_string());
 
     let mut random = thread_rng();
@@ -35,16 +33,13 @@ fn main() {
     let mut current_week = get_current_week();
     println!("Current week is {}", current_week);
 
-    let mut shifts: Vec<Shift> = Vec::new();
-    //TODO use map
-    for name in input {
+    let shifts: Vec<Shift> = input.iter().map(|input_name| {
         current_week = current_week + 1;
-        let shift = Shift {
-            name,
+        Shift {
+            name: input_name.clone(),
             week: current_week,
-        };
-        shifts.push(shift);
-    }
+        }
+    }).collect();
 
     for s in shifts {
         thread::sleep(Duration::from_secs(3));
@@ -53,7 +48,7 @@ fn main() {
 
     //print_output_via_decorator(&input, delay);
 }
-
+/*
 fn read_input() -> String {
     println!("Please input something");
     let mut smt = String::new();
@@ -88,7 +83,7 @@ fn print_output_via_decorator(output: &Vec<String>, decorator: fn(&String) -> &S
     for out in output {
         println!("{}", decorator(out));
     }
-}
+}*/
 
 fn read_file_content(path: String) -> Vec<String> {
     //TODO Error handling
@@ -106,9 +101,4 @@ fn read_file_content(path: String) -> Vec<String> {
 fn get_current_week() -> u32 {
     let now: DateTime<Local> = chrono::offset::Local::now();
     now.iso_week().week()
-    //use chrono::naive::IsoWeek;
-    //use chrono::Datelike;
-
-    //Datelike::
-    //IsoWeek now = IsoWeek::ne
 }
